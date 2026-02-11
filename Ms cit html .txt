@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>MS-CIT Mock Online Exam</title>
+<style>
+body{font-family:Arial;background:#eef2f7}
+.container{max-width:900px;margin:auto;background:#fff;padding:20px;border-radius:8px}
+h1{text-align:center;color:#1e293b}
+.question{margin:15px 0;padding:10px;border-bottom:1px solid #ddd}
+.timer{color:red;font-weight:bold;text-align:right;font-size:18px}
+button{padding:12px 25px;font-size:16px;background:#2563eb;color:#fff;border:none;border-radius:5px}
+button:hover{background:#1d4ed8}
+</style>
+</head>
+
+<body>
+<div class="container">
+<h1>MS-CIT MOCK ONLINE EXAM</h1>
+
+<label><b>Candidate Name:</b></label>
+<input type="text" id="cname" required>
+<div class="timer">Time Left: <span id="time">30:00</span></div>
+
+<form id="examForm">
+
+<!-- QUESTIONS START -->
+
+<script>
+let questions = [
+["CPU cha full form kay aahe?","Central Processing Unit","Control Program Unit","Computer Power Unit",0],
+["MS Word ka use kis liye hota hai?","Document banane","Video editing","Music sunane",0],
+["Keyboard input device aahe ka?","Ho","Nahi","Output device",0],
+["Mouse ka use kya hota hai?","Point aur click","Print","Scan",0],
+["Internet ka full form?","Interconnected Network","Internal Network","International Network",0],
+["Ctrl + C ka use?","Copy","Cut","Paste",0],
+["Ctrl + V ka use?","Paste","Copy","Undo",0],
+["Ctrl + X ka use?","Cut","Copy","Save",0],
+["RAM ka full form?","Random Access Memory","Read Access Memory","Run Access Memory",0],
+["Computer ka dimaag kaunsa part hai?","CPU","Monitor","Keyboard",0],
+["MS Excel kis liye use hota hai?","Calculation","Typing","Drawing",0],
+["Printer kaunsa device hai?","Output","Input","Storage",0],
+["Scanner kaunsa device hai?","Input","Output","Process",0],
+["Hard disk ka kaam?","Data store","Data print","Data type",0],
+["Email ka use?","Message bhejna","Game khelna","Typing",0],
+["Google kya hai?","Search Engine","Browser","OS",0],
+["Windows kya hai?","Operating System","Software only","Hardware",0],
+["File save karne ka shortcut?","Ctrl+S","Ctrl+P","Ctrl+Z",0],
+["Delete key ka kaam?","Data hatana","Copy","Paste",0],
+["PDF ka full form?","Portable Document Format","Print Data File","Public Data Form",0],
+["Pen drive kya hai?","Storage device","Input","Output",0],
+["Monitor kya hai?","Output device","Input device","Storage",0],
+["WWW ka full form?","World Wide Web","World Web Window","Wide World Web",0],
+["Laptop kya hai?","Portable computer","Software","Input device",0],
+["Browser ka example?","Chrome","Windows","Excel",0],
+["Virus kya karta hai?","Computer ko nuksan","Speed badhata","Print karta",0],
+["Antivirus ka kaam?","Virus remove","Game","Music",0],
+["Zoom kya hai?","Video meeting app","OS","Hardware",0],
+["Google Drive ka use?","Online storage","Typing","Print",0],
+["Ctrl + Z ka use?","Undo","Redo","Save",0],
+["Ctrl + P ka use?","Print","Paste","Page setup",0],
+["Excel me formula ka sign?","=","+","*",0],
+["PowerPoint ka use?","Presentation","Calculation","Typing",0],
+["Smartphone kya hai?","Mobile device","Input","Output",0],
+["WiFi ka use?","Internet","Print","Scan",0],
+["Bluetooth ka use?","Data share","Print","Type",0],
+["Website kya hoti hai?","Web page collection","Software","Hardware",0],
+["Username + Password ka use?","Login","Print","Scan",0],
+["Logout ka matlab?","Baher nikalna","Login","Delete",0],
+["Cyber crime kya hai?","Online crime","Offline exam","Typing error",0],
+["UPI ka use?","Online payment","Typing","Print",0],
+["ATM ka full form?","Automated Teller Machine","Auto Transfer Money","Any Time Money",0],
+["Ctrl + A ka use?","Select all","Copy","Save",0],
+["Caps Lock ka use?","Capital letters","Small letters","Numbers",0],
+["Tab key ka use?","Space","Enter","Delete",0],
+["Enter key ka use?","Next line","Delete","Undo",0],
+["Backspace key ka use?","Delete left","Delete right","Save",0],
+["Computer start karne ko kya bolte?","Booting","Shut down","Formatting",0]
+];
+
+for(let i=0;i<questions.length;i++){
+document.write(`<div class='question'>
+<b>Q${i+1}. ${questions[i][0]}</b><br>
+<input type='radio' name='q${i}' value='1'> ${questions[i][1]}<br>
+<input type='radio' name='q${i}' value='0'> ${questions[i][2]}<br>
+<input type='radio' name='q${i}' value='0'> ${questions[i][3]}<br>
+</div>`);
+}
+</script>
+
+<button type="button" onclick="submitExam()">Submit Exam</button>
+</form>
+
+<p id="result"></p>
+</div>
+
+<script>
+function submitExam(){
+let score=0;
+for(let i=0;i<50;i++){
+let q=document.querySelector(`input[name="q${i}"]:checked`);
+if(q){score+=parseInt(q.value);}
+}
+let name=document.getElementById("cname").value;
+let result=document.getElementById("result");
+if(score>=25){
+result.innerHTML=`<h2>Congratulations ${name} 🎉</h2>Score: ${score}/50<br>Status: PASS`;
+}else{
+result.innerHTML=`<h2>Sorry ${name} ❌</h2>Score: ${score}/50<br>Status: FAIL`;
+}
+}
+
+let seconds=1800;
+setInterval(()=>{
+let m=Math.floor(seconds/60);
+let s=seconds%60;
+document.getElementById("time").innerHTML=m+":"+(s<10?"0":"")+s;
+seconds--;
+if(seconds<0) submitExam();
+},1000);
+</script>
+
+</body>
+</html>
